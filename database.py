@@ -1,6 +1,12 @@
 #! /usr/bin/env python
 #coding:utf-8
-import pymysql
+# import pymysql
+import MySQLdb
+
+HOST='localhost'
+PORT=3306
+USER='root'
+PASSWD='yuwei123'
 
 class HANDLE():
 
@@ -12,10 +18,10 @@ class HANDLE():
         rows = ()
         print 'submit sql : ',self.sql
         try:
-            con = pymysql.connect(host='localhost', port=3306, user='root', passwd='',charset='UTF8')
-            con.cursor()
-            con.cursor().execute(self.sql)
-            rows = con.cursor().fetchall()
+            con = MySQLdb.connect(host=HOST, port=PORT, user=USER, passwd=PASSWD, db=self.db ,charset='UTF8')
+            cur = con.cursor()
+            cur.execute(self.sql)
+            rows = cur.fetchall()
         finally:
             con.cursor().close()
             con.close()
@@ -24,8 +30,8 @@ class HANDLE():
 class CONDITION():
 
     def __init__(self,db,sql):
-        self.sql = sql
         self.db = db
+        self.sql = sql
 
     def where(self,**kwargs):
         if kwargs:
@@ -41,8 +47,8 @@ class CONDITION():
 class DB():
 
     def __init__(self,db,table):
-        self.table = table
         self.db = db
+        self.table = table
 
     def select(self,*rows):
         if not rows:
