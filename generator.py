@@ -2,7 +2,7 @@
 #coding:utf-8
 from template import records_class,records_info,table_class
 from database import HANDLE
-
+import os
 class AutoGenerator():
 
     def __init__(self,db):
@@ -52,9 +52,11 @@ class AutoGenerator():
     def export_file(self,file_path='tables'):
         tables = self._get_tables_name()
         src_path = './{0}/{1}'.format(file_path,self.db)
-
+        if not os.path.exists(src_path):
+            os.makedirs(src_path)
         with open('{0}/__init__.py'.format(src_path), 'wb') as src:
             src.write('')
+
         for table in tables:
             table = table[0]
             rows = self._get_table_rows_info(table)
