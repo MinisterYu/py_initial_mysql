@@ -62,10 +62,3 @@ class DB(object):
         sql = 'INSERT INTO `{2}` ({0}) VALUES ({1})'.format(row,value,self.table)
         return HANDLE(self.db,sql.format(row,value,self.table))
 
-if __name__ == '__main__':
-    report = DB('paic','report')
-    report.select('project','version','lamp').where(project='PAD-PHRMS',version='1.0.0').submit()
-    report.update(project='PAD-PHRMS',lamp='0').where(project='PAD-HRMS',version='1.1.10').submit()
-    report.insert(project='PAD-PHRMS',lamp='0').submit()
-
-
