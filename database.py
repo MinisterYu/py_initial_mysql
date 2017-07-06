@@ -2,7 +2,7 @@
 #coding:utf-8
 import pymysql
 
-class HANDLE(object):
+class HANDLE():
 
     def __init__(self,db,sql):
         self.db = db
@@ -21,7 +21,7 @@ class HANDLE(object):
             con.close()
         return rows
 
-class CONDITION(object):
+class CONDITION():
 
     def __init__(self,db,sql):
         self.sql = sql
@@ -38,7 +38,7 @@ class CONDITION(object):
         # print sql
         return HANDLE(self.db,sql)
 
-class DB(object):
+class DB():
 
     def __init__(self,db,table):
         self.table = table

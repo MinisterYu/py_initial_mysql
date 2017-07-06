@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 #coding:utf-8
-from class_template import records_class,records_info,table_class
-from database_set import HANDLE
+from template import records_class,records_info,table_class
+from database import HANDLE
 
 class AutoGenerator():
 
@@ -14,6 +14,8 @@ class AutoGenerator():
         self.records = ''
         self.records_property = ''
 
+        self._get_tables_name()
+        self._get_table_rows_info()
         self._make_class()
         self._make_records_class()
 
@@ -59,7 +61,6 @@ class AutoGenerator():
         print  src
         with open('{0}/{1}.py'.format(file_path,self.class_name),'wb') as src_code:
             src_code.write(src)
-
         print 'generate file done...'
 
 if __name__ == '__main__':

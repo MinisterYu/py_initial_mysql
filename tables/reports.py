@@ -1,5 +1,5 @@
 #coding:utf-8
-from py_initial_mysql.database_set import DB
+from py_initial_mysql.database import DB
 
 class reports():
     def __init__(self):
