@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #coding:utf-8
-
+import pymysql
 
 class HANDLE(object):
 
@@ -9,10 +9,17 @@ class HANDLE(object):
         self.sql = sql
 
     def submit(self):
-        # print 'connect to db : ',self.db
+        rows = ()
         print 'submit sql : ',self.sql
-        return [['phrms','1.1.1','green','10']]
-        # print  'disconnect to db : ',self.db
+        try:
+            con = pymysql.connect(host='localhost', port=3306, user='root', passwd='',charset='UTF8')
+            con.cursor()
+            con.cursor().execute(self.sql)
+            rows = con.cursor().fetchall()
+        finally:
+            con.cursor().close()
+            con.close()
+        return rows
 
 class CONDITION(object):
 

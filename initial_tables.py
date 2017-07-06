@@ -1,13 +1,14 @@
 #! /usr/bin/env python
 #coding:utf-8
 from class_template import records_class,records_info,table_class
+from database_set import HANDLE
 
 class AutoGenerator():
 
     def __init__(self,db):
         self.db = db
-        self.class_name = 'reports'
-        self.class_row= ['project','version','lamp','fixed']
+        self.class_name_sql = 'reports'
+        self.class_row_sql = ['project','version','lamp','fixed']
 
         self.table = ''
         self.records = ''
@@ -17,21 +18,21 @@ class AutoGenerator():
         self._make_records_class()
 
     def _execute(self,sql):
-        try:
-            pass
-        finally:
-            pass
+        handle = HANDLE(self.db,sql)
+        return handle.submit()
 
     def _get_tables_name(self):
         '''
         :return: tables name tuple
         '''
+        self.class_name = self._execute('')
         return self.class_name
 
     def _get_table_rows_info(self):
         '''
         :return: table's struct tuple
         '''
+        self.class_row = self._execute('')
         return self.class_row
 
     def _make_class(self):
