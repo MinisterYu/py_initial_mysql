@@ -7,7 +7,7 @@ class AutoGenerator():
 
     def __init__(self,db):
         self.db = db
-        self.class_name_sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'paic_reports'"
+        self.class_name_sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{0}'".format(db)
         self.class_row_sql = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE table_name = '{0}';"
 
     def _execute(self,sql):
