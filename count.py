@@ -32,27 +32,26 @@ class Count:
         self.return_a_speed = self.vb + self.vc
         self.return_b_speed = self.va + self.vc
         self.total_distance = float(s)
-        self.total_time = s / (va + vb)
+        self.total_time = float(s / (va + vb))
 
     def func(self):
         if self.flag % 2 == 0 and self.total_time > 0:
-            release_time = (self.total_distance / self.return_b_speed)
+            release_time = float(self.total_distance / self.return_a_speed)
             self.total_time = self.total_time - release_time
-            self.total_distance -= release_time * self.va
+            self.total_distance -= (release_time * self.va+release_time * self.vb)
             self.flag += 1
             self.func()
-        else:
-            if self.total_time > 0:
-                release_time = (self.total_distance / self.return_a_speed)
-                self.total_time = self.total_time - release_time
-                self.total_distance -= release_time * self.vb
-                self.flag += 1
-                self.func()
+        elif self.total_time > 0:
+            release_time = float(self.total_distance / self.return_b_speed)
+            self.total_time = self.total_time - release_time
+            self.total_distance -= (release_time * self.va+release_time * self.vb)
+            self.flag += 1
+            self.func()
         return self.flag
 
 
 if __name__ == '__main__':
-    test = Count(20, 30, 300, 10000)
+    test = Count(10, 10, 15, 100)
     print test.func()
 
 
